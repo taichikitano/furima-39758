@@ -1,24 +1,53 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+### Association
+- has_many :items
+- has_many :purchases
 
-* Ruby version
+## items テーブル
+| Column                      | Type      | Options                        | 
+| --------------------------- | --------- | ------------------------------ |
+| item_name                   | string    | null: false                    |
+| description                 | text      | null: false                    |
+| category                    | string    | null: false                    |
+| status                      | string    | null: false                    |
+| shipping_fee_responsibility | string    | null: false                    |
+| shipping_origin             | string    | null: false                    |
+| lead_time                   | integer   | null: false                    |
+| price                       | integer   | null: false                    |
+| user                        | references| null: false, foreign_key: true |
+### Association
+- belongs_to :user
+- has_one :purchase
 
-* System dependencies
+## purchases テーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_pne :shippings
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## shippings テーブル
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| postal_code  | integer    | null: false                    |
+| prefecture   | string     | null: false                    |
+| city         | string     | null: false                    |
+| address      | string     | null: false                    |
+| building     | string     |                                |
+| phone_number | integer    | null: false                    |
+| purchase     | references | null: false, foreign_key: true |
+### Association
+- belongs_to :purchase
