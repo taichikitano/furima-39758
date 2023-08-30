@@ -12,15 +12,10 @@
 | last_name          | string  | null: false               |
 | first_name_kana    | string  | null: false               |
 | last_name_kana     | string  | null: false               |
-| birth_year_id      | integer | null: false               |
-| birth_month_id     | integer | null: false               |
-| birth_day_id       | integer | null: false               |
+| birthday           | date    | null: false               |
 ### Association
 - has_many :items
 - has_many :purchases
-- belongs_to_active_hash :birth_year
-- belongs_to_active_hash :birth_month
-- belongs_to_active_hash :birth_day
 
 ## items テーブル
 | Column                         | Type      | Options                        | 
@@ -57,7 +52,7 @@
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| prefecture-id | string     | null: false                    |
+| prefecture-id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address       | string     | null: false                    |
 | building      | string     |                                |
