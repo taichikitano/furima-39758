@@ -86,3 +86,7 @@ end
 gem 'devise'
 
 gem 'pry-rails'
+
+gem 'active_hash'
+
+gem 'active_storage_validations'
