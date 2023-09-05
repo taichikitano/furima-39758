@@ -10,7 +10,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :lead_time
 
-  validates :item_name, :description,  presence: true
+  validates :item_name,  presence: true, length: { maximum: 40 }
+  validates :description,  presence: true, length: { maximum: 1000 }
 
   validates :category_id, :status_id, :shipping_fee_responsibility_id, 
             :prefecture_id, :lead_time_id,  
