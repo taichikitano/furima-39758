@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  
+  def index 
+    @items = Item.order(created_at: :desc)
+  end
 
   def new
     @item = Item.new
@@ -22,8 +26,5 @@ class ItemsController < ApplicationController
       :prefecture_id, :lead_time_id, :price).merge(user_id: current_user.id
     )
   end
-
-
-
-
+  
 end
