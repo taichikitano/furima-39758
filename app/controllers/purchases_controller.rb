@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_prototype
   before_action :authenticate_user!
   before_action :contributor_confirmation
+  before_action :move_to_root
 
 
   def index
@@ -46,6 +47,10 @@ class PurchasesController < ApplicationController
   
   def contributor_confirmation
     redirect_to root_path if current_user == @item.user
+  end
+
+  def move_to_root
+    redirect_to root_path if @item.purchase.present?
   end
 
 end

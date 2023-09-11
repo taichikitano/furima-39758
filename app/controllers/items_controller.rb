@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_prototype, except: [:index, :new, :create]
   before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+  before_action :move_to_root, only: [:edit, :destroy]
   
   def index 
     @items = Item.order(created_at: :desc)
@@ -55,6 +56,10 @@ class ItemsController < ApplicationController
   
   def contributor_confirmation
     redirect_to root_path unless current_user == @item.user
+  end
+
+  def move_to_root
+    redirect_to root_path if @item.purchase.present?
   end
 
 end

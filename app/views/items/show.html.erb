@@ -8,9 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <div class="sold-out">
-        <%# <span>Sold Out!!</span>商品購入機能実装後に対応 %>
-      </div>
+      <% if @item.purchase.present? %>
+        <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -22,13 +24,12 @@
     </div>
 
     <% if user_signed_in? %>
-      <% if current_user == @item.user %>
+      <% if current_user == @item.user && !@item.purchase.present? %>
         <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete}, class:"item-destroy" %>
-      <% else %>
+      <% elsif current_user != @item.user && !@item.purchase.present? %>
         <%= link_to "購入画面に進む", item_purchases_path(@item.id),class:"item-red-btn"%>
-      <%# 商品購入機能実装完了後、売り切れ時の非表示設定対応%>
       <% end %>
     <% end %>
 
