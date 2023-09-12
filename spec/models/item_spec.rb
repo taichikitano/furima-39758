@@ -34,27 +34,27 @@ RSpec.describe Item, type: :model do
       it 'categoryが「---」では出品できない' do
         @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category を選択してください")
       end
       it 'statusが「---」では出品できない' do
         @item.status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Status を選択してください")
       end
       it 'shipping_fee_resposibilityが「---」では出品できない' do
         @item.shipping_fee_responsibility_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping fee responsibility can't be blank")
+        expect(@item.errors.full_messages).to include("Shipping fee responsibility を選択してください")
       end
       it 'prefectureが「---」では出品できない' do
         @item.prefecture_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture を選択してください")
       end
       it 'lead_timeが「---」では出品できない' do
         @item.lead_time_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Lead time can't be blank")
+        expect(@item.errors.full_messages).to include("Lead time を選択してください")
       end
       it 'priceが空では出品できない' do
         @item.price = ''
@@ -84,3 +84,5 @@ RSpec.describe Item, type: :model do
     end
   end
 end
+
+
