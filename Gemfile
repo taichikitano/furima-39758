@@ -94,3 +94,5 @@ gem 'active_storage_validations'
 gem 'payjp'
 
 gem 'gon'
+
+gem 'rails-i18n'

@@ -15,7 +15,7 @@ class Item < ApplicationRecord
 
   validates :category_id, :status_id, :shipping_fee_responsibility_id, 
             :prefecture_id, :lead_time_id,  
-            numericality: { other_than: 1 , message: "can't be blank"
+            numericality: { other_than: 1 , message: "を選択してください"
            }
 
   validates :price, presence: true, format: { with: /\A[0-9]+\z/ }

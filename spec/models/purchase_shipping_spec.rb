@@ -23,17 +23,17 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'postal_codeが空だと購入できない' do
         @purchase.postal_code = ''
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Postal code can't be blank")
+        expect(@purchase.errors.full_messages).to include("Postal code can't be blank", "Postal code は不正な値です ※ハイフンを含める必要があります")
       end
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと購入できない' do
         @purchase.postal_code = '1234567'
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@purchase.errors.full_messages).to include("Postal code は不正な値です ※ハイフンを含める必要があります")
       end
       it 'prefectureが「---」では購入できない' do
         @purchase.prefecture_id = '1'
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@purchase.errors.full_messages).to include("Prefecture を選択してください")
       end
       it 'cityが空だと購入できない' do
         @purchase.city = ''
@@ -53,17 +53,17 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'phone_numberが半角数値でないと購入できない' do
         @purchase.phone_number = 'abcdefghij'
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+        expect(@purchase.errors.full_messages).to include("Phone number は不正な値です")
       end
       it 'phone_numberが10桁未満だと購入できない' do
         @purchase.phone_number = '123456789'
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number must be between 10 and 11 digits")
+        expect(@purchase.errors.full_messages).to include("Phone number は10文字以上11文字以内で入力してください")
       end
       it 'phone_numberが12桁以上だと購入できない' do
         @purchase.phone_number = '123456789012'
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Phone number must be between 10 and 11 digits")
+        expect(@purchase.errors.full_messages).to include("Phone number は10文字以上11文字以内で入力してください")
       end
       it 'tokenが空では購入できない' do
         @purchase.token = ''
@@ -83,5 +83,4 @@ RSpec.describe PurchaseShipping, type: :model do
     end
   end
 end
-
 
